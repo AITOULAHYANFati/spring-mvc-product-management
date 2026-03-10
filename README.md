@@ -11,7 +11,7 @@ Application web de gestion des produits développée avec Spring Boot, Spring Da
 - [Structure du projet](#structure-du-projet)
 - [Lancer le projet](#lancer-le-projet)
 - [Sécurité](#sécurité)
-- [Captures d'écran](#captures-décran)
+
 
 ---
 
