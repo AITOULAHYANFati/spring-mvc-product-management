@@ -2,6 +2,7 @@ package org.example.springmvcproductmanagement.sec;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.core.userdetails.User;
@@ -30,16 +31,14 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        //                         ^^^^^^^^^^^^^^^^^^^ nom changé ici
         http
-                .formLogin(form -> form
-                        .defaultSuccessUrl("/index")
-                        .permitAll()
+                .formLogin(Customizer.withDefaults()
                 )
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/webjars/**", "/h2-console/**").permitAll()
-                        .requestMatchers("/index/**").hasRole("USER")
-                        .requestMatchers("/save/**", "/delete/**").hasRole("ADMIN")
+                        .requestMatchers("/user/**").hasRole("USER")
+                        .requestMatchers("/admin/**").hasRole("ADMIN")
+                        .requestMatchers("/public/**").permitAll()
                         .anyRequest().authenticated()
                 );
 
