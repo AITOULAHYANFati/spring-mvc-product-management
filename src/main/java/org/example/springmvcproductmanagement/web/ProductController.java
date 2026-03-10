@@ -46,4 +46,9 @@ public class ProductController {
         return "redirect:/user/index";
 
     }
+    @GetMapping("/notAuthorized")
+    public String notAuthorized() {
+        return "notAuthorized";
+
+    }
 }

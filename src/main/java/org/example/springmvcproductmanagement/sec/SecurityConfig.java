@@ -34,13 +34,17 @@ public class SecurityConfig {
         http
                 .formLogin(Customizer.withDefaults()
                 )
+                .csrf(Customizer.withDefaults())
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/webjars/**", "/h2-console/**").permitAll()
                         .requestMatchers("/user/**").hasRole("USER")
                         .requestMatchers("/admin/**").hasRole("ADMIN")
                         .requestMatchers("/public/**").permitAll()
                         .anyRequest().authenticated()
-                );
+
+                )
+                .exceptionHandling(eh->eh.accessDeniedPage("/notAuthorized"));
+
 
         return http.build();
     }

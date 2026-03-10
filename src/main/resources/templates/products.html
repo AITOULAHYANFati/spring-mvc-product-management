@@ -1,14 +1,15 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymleaf.org"
             xmlns:layout="http://www.ultraq.net.nz/tyymeleaf/layout"
-            layout:decorate="layout1.html">
+            layout:decorate="layout1.html"
+      xmlns:sec="http://www.thmeleaf.org/extras/spring-security">
             <head>
     <meta charset="UTF-8">
     <title>Products</title>
 </head>
 <body>
 <div class="p-3" layout:fragment="content1">
-    <div class="p-3">
+    <div class="p-3" sec:authorize="hasRole('ADMIN')">
         <a class="btn btn-primary" th:href="@{/admin/newProduct}">New Product</a>
 
     </div>
@@ -25,7 +26,7 @@
                 <td th:text="${p.name}"></td>
                 <td th:text="${p.price}"></td>
                 <td th:text="${p.quantity}"></td>
-                <td>
+                <td sec:authorize="hasRole('ADMIN')">
                     <a class="btn btn-danger" onclick="return confirm('Etes vous sure ?')"  th:href="@{/admin/delete(id=${p.id})}">Delete</a>
                 </td>
             </tr>
